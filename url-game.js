@@ -39,7 +39,7 @@ UrlGame.prototype.isUrlValid = function(secret) {
 
 UrlGame.prototype.generateURL = function(secret, state, emails) {
     var winloc = window.location;
-    var baseURL = winloc.protocol + "//" + winloc.host + "/" + winloc.pathname;
+    var baseURL = winloc.protocol + "//" + winloc.host + winloc.pathname;
     var url = baseURL + '?emails=' + encodeURI(emails) + '&state=' + encodeURI(state) + '&leave=' + encodeURI(sha256(secret + state));
     if (this.urlParams.leave) {
         url += '&check=' + encodeURI(this.urlParams.leave);
