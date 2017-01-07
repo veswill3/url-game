@@ -1,0 +1,74 @@
+body {
+    font-size: 16px;
+    font-family: 'Comic Sans MS', Helvetica, sans-serif;
+}
+table {
+    width: 100%;
+    max-width: 400px;
+    -webkit-user-select: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.playable-row > td {
+    border: 2px solid #000000;
+}
+td {
+    -webkit-border-radius: 50%;
+}
+/* make height match width */
+td > div {
+    height: 0;
+    padding-bottom: 100%;
+}
+@-webkit-keyframes player-1-win {
+    0%    { background-color: red; }
+    50%   { background-color: yellow; }
+    100%  { background-color: red; }
+}
+@-moz-keyframes player-1-win {
+    0%    { background-color: red; }
+    50%   { background-color: yellow; }
+    100%  { background-color: red; }
+}
+@keyframes player-1-win {
+    0%    { background-color: red; }
+    50%   { background-color: yellow; }
+    100%  { background-color: red; }
+}
+.player-1 {
+    background-color: red;
+}
+.player-1.winning-tile {
+    -webkit-animation: player-1-win 1s infinite;
+    -moz-animation:    player-1-win 1s infinite;
+    animation:         player-1-win 1s infinite;
+}
+@-webkit-keyframes player-2-win {
+    0%    { background-color: blue; }
+    50%   { background-color: lime; }
+    100%  { background-color: blue; }
+}
+@-moz-keyframes player-2-win {
+    0%    { background-color: blue; }
+    50%   { background-color: lime; }
+    100%  { background-color: blue; }
+}
+@keyframes player-2-win {
+    0%    { background-color: blue; }
+    50%   { background-color: lime; }
+    100%  { background-color: blue; }
+}
+.player-2 {
+    background-color: blue;
+}
+.player-2.winning-tile {
+    -webkit-animation: player-2-win 1s infinite;
+    -moz-animation:    player-2-win 1s infinite;
+    animation:         player-2-win 1s infinite;
+}
+.hidden {
+    display: none;
+}
+.disabled {
+    pointer-events: none;
+}

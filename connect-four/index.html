@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect-Four</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <script src="../sha256.min.js" type="text/javascript"></script>
+    <script src="../url-game.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
+</head>
+<body onload="init();">
+
+<h1>Connect-Four</h1>
+
+<!-- new-game-welcome -->
+<div class="hidden" 
+    data-new-game
+    data-game-step="1">
+    <h3>Challenge a friend to play by email</h3>
+    <p>Fill out the info below to challenge a friend. After you make your move this will compose an email with a link for them to take their turn. They will send an email back when it is time to take your turn. Simple.</p>
+</div>
+
+<!-- email-address-collection -->
+<div class="hidden" 
+    data-new-game
+    data-game-step="1,2">
+    <form id="email-address-collection-form" action="javascript:saveEmails();">
+        <p>First, enter both of your email addresses.</p>
+        <input type="email" id="email1" required autofocus placeholder="Your email">
+        <input type="email" id="email2" required placeholder="Friend's email">
+        <button type="submit">Save</button>
+        <p>Don't worry, this website does not track any information, it does not even have a database to store game data - everything is saved in the hyperlink. If you are worried about it, check out the code in your browser or where it is <a href="github.com">hosted</a>.</p>
+    </form>
+    <a id="edit-emails" href="" style="display: none;"></a>
+
+</div>
+
+<!-- new-player-welcome -->
+<div class="hidden" 
+    data-collecting-players
+    data-game-step="1">
+    <p><span data-player-email="0">A friend</span> has challeneged you to a game of Connect-Four. After you make your move this will compose an email with a link for them to take their turn. They will send an email back when it is time to take your turn. Simple.</p>
+</div>
+
+<!-- create-a-secret -->
+<div class="hidden" 
+    data-new-game
+    data-collecting-players
+    data-game-step="1,2">
+    <form id="create-a-secret-form" action="javascript:saveSecret();">
+        <p>Create a secret. This is used to make sure your opponent cannot alter previous moves or take turns for you.</p>
+        <input type="password" id="secret-create" required placeholder="Create a secret">
+        <input type="password" id="secret-confirm" required placeholder="Confirm your secret">
+        <button type="submit">Save</button>
+        <p>How does this work? When you make a move, the current history is hashed along with your secret. Later, when it is your turn again, your secret is used to verify the previous history, ensuring nothing has been tampered with.</p>
+    </form>
+    <a id="edit-secret" href="" style="display: none;">Click here to edit your secret.</a>
+</div>
+
+<!-- verses-indicator -->
+<div class="hidden" 
+    data-active-game
+    data-game-step="1">
+    <p><span data-player-email="0"></span> vs <span data-player-email="1"></span></p>
+</div>
+
+<!-- confirm-secret -->
+<div class="hidden" 
+    data-active-game
+    data-game-step="1">
+
+    <form action="javascript:verifyGameData();">
+        <input type="password" id="secret" required autofocus placeholder="Confirm your secret">
+        <button type="submit">Confirm</button>
+    </form>
+    <div id="verifyFailMessage" style="display: none;">
+        <p>Verification failed - try entering your secret again.</p>
+        <p>If you are sure that you entered your secret correctly, then it is possible that someone has tampered with the game data. You may need revert to a previous move by finding the old email or start a new game.</p>
+    </div>
+</div>
+
+<!-- gameboard -->
+<div id="gameboard" class="hidden"
+    data-new-game
+    data-collecting-players
+    data-active-game
+    data-game-step="2,3">
+    <!-- built in js -->
+</div>
+
+<!-- send-your-turn -->
+<div class="hidden" 
+    data-new-game
+    data-collecting-players
+    data-active-game
+    data-game-step="2">
+    <p>Time to make your move. If you need a refresher on how to play, <a href="http://www.wikihow.com/Play-Connect-4">click here</a>.</p>
+    <br>
+    <button id="sendmove" disabled onclick="sendMove();">Confirm and send your turn</button>
+    <p>This will compose an email with a link to your opponents turn. Feel free to edit the body of the email but dont change the link or else.</p>
+    <a id="temp-url"></a>
+</div>
+
+<!-- end-game-message -->
+<div class="hidden"
+    data-active-game
+    data-game-step="3">
+    <p>Aw shucks, you lost ¯\_(ツ)_/¯</p>
+    <p>The fun doesn't have to end. <a href="?">New game</a>?</p>
+</div>
+
+</body>
+</html>
